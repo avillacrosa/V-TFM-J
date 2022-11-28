@@ -5,7 +5,8 @@ function runFEM(ns, ds, E, nu, uBC)
     [x, n] = meshgen(ns, ds);
 	X = x;
     [Kg1, Kg2] = assembleK(X,n);
-    [dof, fix_vals] = BCtoNodal(X, uBC);
+    [fix, fix_vals] = BCtoNodal(X, uBC);
+	dof = not(fix);
     dofv = dof';
 	dofv = dofv(:);
     
@@ -18,6 +19,7 @@ function runFEM(ns, ds, E, nu, uBC)
     it = 1;
 
     tol = norm(T(dofv));
+	profile viewer
 	while tol > 1e-10
     	K = constKSparse(X, x, n, l, mu, Kg1, Kg2);
     	Kdf = K(dofv, dofv);
