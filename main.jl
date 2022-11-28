@@ -1,9 +1,14 @@
 include("VTFM/src/VTFM.jl")
-# include("VTFM/src/sumtest.jl")
-
 using .VTFM
-VTFM.greet()
-ns = [2, 2, 2]
-ds = [1, 1, 1]
-s = ftest(1,1);
-println("# The value of my var is: ", s)
+println("Running!")
+@time begin
+n = 40;
+ns = [n, n, n]
+ds = [1/(n-1), 1/(n-1), 1/(n-1)]
+uBC = [3 0 3 0; 3 0 1 0; 3 0 2 0; 3 1 3 0.1]
+E  = 100;
+nu = 0.3;
+
+runFEM(ns, ds, E, nu, uBC)
+
+end
