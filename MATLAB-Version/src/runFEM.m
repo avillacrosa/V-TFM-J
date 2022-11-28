@@ -19,7 +19,6 @@ function runFEM(ns, ds, E, nu, uBC)
     it = 1;
 
     tol = norm(T(dofv));
-	profile viewer
 	while tol > 1e-10
     	K = constKSparse(X, x, n, l, mu, Kg1, Kg2);
     	Kdf = K(dofv, dofv);
